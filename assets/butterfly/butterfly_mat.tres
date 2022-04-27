@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dor3f6klk66pf"]
+
+[ext_resource type="Shader" path="res://assets/shaders/butterfly/butterfly.gdshader" id="1_ogbe4"]
+[ext_resource type="Texture2D" uid="uid://bvka5jxnlvk6e" path="res://assets/shaders/butterfly/butterfly_orange.png" id="2_2r4p1"]
+
+[resource]
+render_priority = 0
+shader = ExtResource( "1_ogbe4" )
+shader_param/displ_amnt = null
+shader_param/displ_speed = null
+shader_param/time_scale = null
+shader_param/butterfly_tex = ExtResource( "2_2r4p1" )

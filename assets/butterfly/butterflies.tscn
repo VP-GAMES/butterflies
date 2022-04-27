@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://4ni2657o5ac5"]
+
+[ext_resource type="Shader" path="res://assets/butterfly/butterfly.gdshader" id="1_0x7hk"]
+[ext_resource type="Texture2D" uid="uid://bvka5jxnlvk6e" path="res://assets/butterfly/butterfly_orange.png" id="2_clrl7"]
+[ext_resource type="Script" path="res://assets/butterfly/MultiMeshInstanceButterflies.gd" id="3_3d4u6"]
+
+[sub_resource type="Environment" id="Environment_qj4fn"]
+background_mode = 1
+background_color = Color(0.603922, 0.709804, 0.698039, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xaqwh"]
+render_priority = 0
+shader = ExtResource( "1_0x7hk" )
+shader_param/displ_amnt = 1.0
+shader_param/displ_speed = 10.0
+shader_param/time_scale = 10.0
+shader_param/butterfly_tex = ExtResource( "2_clrl7" )
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bhxux"]
+material = SubResource( "ShaderMaterial_xaqwh" )
+subdivide_width = 1
+subdivide_depth = 1
+
+[sub_resource type="MultiMesh" id="MultiMesh_g8etn"]
+transform_format = 1
+instance_count = 8
+mesh = SubResource( "PlaneMesh_bhxux" )
+buffer = PackedFloat32Array(0.981808, 0.0433341, 0.184866, -0.0448513, -0.0305076, 0.996962, -0.0716726, 8.86112, -0.18741, 0.0647289, 0.980147, 0.565584, 0.959796, -0.0780357, -0.269633, 9.68433, -0.0472783, 0.901914, -0.429321, 5.03288, 0.276688, 0.424808, 0.861964, 0.435781, 0.214014, 0.654451, -0.725184, 6.42689, -0.032911, 0.746794, 0.66424, 5.67472, 0.976276, -0.118291, 0.181363, -5.16881, 0.0173439, -0.156882, 0.987465, 0.382064, 0.0159371, 0.987531, 0.156613, 1.11544, -0.999723, 0.0130211, 0.0196279, 2.00058, 0.973753, -0.0169111, -0.226979, -3.88978, 0.00712184, 0.999012, -0.0438785, 2.7163, 0.227497, 0.0411103, 0.972911, -0.908824, 0.923459, 0.124769, -0.362846, 2.71245, -0.00724363, 0.951155, 0.30863, 2.21412, 0.38363, -0.282379, 0.879256, 3.21931, -0.343009, -0.17656, -0.92259, -1.96351, 0.00473532, 0.981839, -0.189659, 4.7126, 0.93932, -0.0694235, -0.335943, 3.98441, 0.993219, -0.0146963, -0.115322, -8.33074, 0.0241574, 0.996415, 0.0810774, 1.16678, 0.113717, -0.0833136, 0.990014, -1.12839)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0rbif"]
+albedo_color = Color(0, 0.568627, 0.101961, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_q8yrx"]
+material = SubResource( "StandardMaterial3D_0rbif" )
+size = Vector2(50, 50)
+
+[node name="butterflies" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.794415, 0.410337, -0.447804, 1.49012e-08, 0.737277, 0.67559, 0.607376, 0.536699, -0.585704, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 250.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( "Environment_qj4fn" )
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.879931, 0.475102, 0, -0.475102, 0.879931, 0, 9.13211, 12.243)
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+multimesh = SubResource( "MultiMesh_g8etn" )
+script = ExtResource( "3_3d4u6" )
+max_x = 12.0
+max_y = 12.0
+max_z = 12.0
+speed_rotation = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource( "PlaneMesh_q8yrx" )

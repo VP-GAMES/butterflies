@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7ahuybp05461"]
+
+[ext_resource type="Shader" path="res://assets/butterfly/butterfly.gdshader" id="1_8ejlk"]
+[ext_resource type="Texture2D" uid="uid://bvka5jxnlvk6e" path="res://assets/butterfly/butterfly_orange.png" id="2_4mhg3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6r5fm"]
+render_priority = 0
+shader = ExtResource( "1_8ejlk" )
+shader_param/displ_amnt = 1.0
+shader_param/displ_speed = 15.0
+shader_param/time_scale = 10.0
+shader_param/butterfly_tex = ExtResource( "2_4mhg3" )
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4sa23"]
+material = SubResource( "ShaderMaterial_6r5fm" )
+subdivide_width = 1
+subdivide_depth = 1
+
+[node name="butterfly" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource( "PlaneMesh_4sa23" )
