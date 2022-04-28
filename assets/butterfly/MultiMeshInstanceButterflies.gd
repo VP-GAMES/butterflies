@@ -47,7 +47,8 @@ func _process(delta):
 		_to_pos = _to_pos.translated(_to[i])
 		pos = pos.orthonormalized()
 		pos = _from_pos.interpolate_with(_to_pos, _time_interpolation[i])
-		pos.basis = pos.basis.slerp(pos.looking_at(_to[i]).basis, _time_slerp[i])
+		if abs(pos.origin.length() - _to[i].length()) > 0.01:
+			pos.basis = pos.basis.slerp(pos.looking_at(_to[i]).basis, _time_slerp[i])
 		pos = pos.scaled(mesh_scale)
 		multimesh.set_instance_transform(i, pos)
 		if _time_interpolation[i] >= 1.0:
